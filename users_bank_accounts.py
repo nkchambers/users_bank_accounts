@@ -7,19 +7,11 @@ class User:
         self.age = age
         self.account = BankAccount(int_rate = 0.02, account_balance = 0)
 
-    def make_deposit(self, amount):
-        
-        self.account += amount
-
-
-    def make_withdrawal(self, amount):
-        
-        self.account -= amount
-
 
     def display_user_balance(self):
         
-        print(f"User: {self.first_name} {self.last_name}, Balance: {self.account.account_balance}")
+        print(f"User: {self.first_name} {self.last_name}, Balance: {self.account.display_account_info()}")
+        return self
 
 
     def transfer_money(self, amount, user):
@@ -27,6 +19,7 @@ class User:
         user.account.account_balance += amount
         self.display_user_balance()
         user.display_user_balance()
+        return self
 
 
 
@@ -67,9 +60,7 @@ class BankAccount:
 
 
     def display_account_info(self):
-        print(f"Balance: ${self.account_balance}")
-
-        return self
+        return f"{self.account_balance}"
 
 
     def yield_interest(self):
@@ -79,6 +70,7 @@ class BankAccount:
             print('Insufficient Funds')
         return self
     
+
     @staticmethod 
     def can_yield_int(account_balance):
         if account_balance < 0:
@@ -86,28 +78,27 @@ class BankAccount:
         else:
             return True
 
+
     @classmethod
     def print_all_accounts(cls):
         for account in cls.accounts:
             account.display_account_info()
 
-    
+
 
 #Instantiate Users with Bank Accounts
 Nick = User ('Nick', 'Chambers', 30)
 Bruce = User ('Bruce', 'Wayne', 45)
 
 
-Nick.account.deposit(300).deposit(500).withdraw(400).yield_interest().display_account_info()
-Bruce.account.deposit(2000).deposit(5000).withdraw(1500).withdraw(1000).yield_interest().display_account_info()
+Nick.account.deposit(300).deposit(500).withdraw(400).yield_interest()
+Bruce.account.deposit(2000).deposit(5000).withdraw(1500).withdraw(1000).yield_interest()
 
 Nick.display_user_balance()
 Bruce.display_user_balance()
 
 Bruce.transfer_money(500, Nick)
 
-
-BankAccount.print_all_accounts()
 
 
 
