@@ -46,7 +46,7 @@ class BankAccount:
         if BankAccount.can_withdraw(self.account_balance, amount):
             self.account_balance -= amount
         else:
-            print ('Insufficient Funds: Charging $5 Fee')
+            print ('Insufficient Funds: Charging $5.00 Fee')
             self.account_balance -= 5
 
         return self
